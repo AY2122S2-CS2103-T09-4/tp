@@ -104,15 +104,15 @@ Example: `list n:Water`
 
 Updates the product at the specified INDEX.
 
-Format: `update INDEX | [TAG:NEW_VALUE ...]`
+Format: `update INDEX [TAG:NEW_VALUE ...]`
 
 * Updates the product at the specified `INDEX`. The index refers to the index number shown in the displayed product list. The index **must be a positive integer** (1, 2, 3, …)
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the new values.
 
 Examples:
-* `update 2 | p:14.99` Updates the price of the 2nd product to `14.99`.
-* `update 3 | n:peanuts e:2022-05-21` Updates the name of the 3rd product to `peanuts` and its expiry date to `21 May 2021`.
+* `update 2 p:14.99` Updates the price of the 2nd product to `14.99`.
+* `update 3 n:peanuts e:2022-05-21` Updates the name of the 3rd product to `peanuts` and its expiry date to `21 May 2021`.
 
 ### Finding products: `[coming soon]`
 

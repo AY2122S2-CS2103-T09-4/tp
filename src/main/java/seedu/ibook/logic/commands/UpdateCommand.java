@@ -31,7 +31,7 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the product identified "
             + "by the index number(a positive integer) used in the displayed product list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX | [TAG:NEW_VALUE ...]\n"
+            + "Parameters: INDEX [TAG:NEW_VALUE ...]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "potato bread "
             + PREFIX_EXPIRY_DATE + "2022-02-14";
