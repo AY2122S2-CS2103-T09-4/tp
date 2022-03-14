@@ -37,7 +37,7 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
 
    * **`list`** : Lists all products.
 
-   * **`add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles` : Adds a product named `Maggie` to iBook.
+   * **`add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`** : Adds a product named `Maggie` to iBook.
 
    * **`delete`**`3` : Deletes the 3rd product shown in the current list.
 
@@ -106,20 +106,13 @@ Updates the product at the specified INDEX.
 
 Format: `update INDEX | [TAG:NEW_VALUE ...]`
 
-* Updates the product at the specified `INDEX`. The index refers to the index number shown in the displayed product list. The index **must be a positive integer** 1, 2, 3, …
+* Updates the product at the specified `INDEX`. The index refers to the index number shown in the displayed product list. The index **must be a positive integer** (1, 2, 3, …)
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the new values.
 
 Examples:
-* `update 2 | n:Apple` Edits the name of the 2nd product to be `Apple`.
-
-*Alternatively*, we are able to update all items that match the tag and value, and replace the respective fields with the new value.
-
-Format: `update [SEARCH_TAG:OLD_VALUE ...] | [TAG:NEW_VALUE ...]`
-
-* Updates all products that match the (tag, value) pair.
-* Must include at least one search_tag and one tag
-* Existing values will be updated to the new values.
+* `update 2 | p:14.99` Updates the price of the 2nd product to `14.99`.
+* `update 3 | n:peanuts e:2022-05-21` Updates the name of the 3rd product to `peanuts` and its expiry date to `21 May 2021`.
 
 ### Finding products: `[coming soon]`
 
