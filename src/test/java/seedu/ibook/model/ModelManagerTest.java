@@ -1,37 +1,30 @@
 package seedu.ibook.model;
-/*
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ibook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.ibook.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 import static seedu.ibook.testutil.Assert.assertThrows;
-
-import static seedu.ibook.testutil.TypicalPersons.ALICE;
-import static seedu.ibook.testutil.TypicalPersons.BENSON;
-
-
+import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
+import static seedu.ibook.testutil.TypicalProducts.PRODUCT_B;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.GuiSettings;
-import seedu.ibook.model.person.NameContainsKeywordsPredicate;
-import seedu.ibook.testutil.AddressBookBuilder;
+import seedu.ibook.model.product.ProductFulfillsFiltersPredicate;
+import seedu.ibook.testutil.IBookBuilder;
 
-
- */
 public class ModelManagerTest {
-/*
     private ModelManager modelManager = new ModelManager();
 
     @Test
     public void constructor() {
-        assertEquals(new OldUserPrefs(), modelManager.getUserPrefs());
+        assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new IBook(), new IBook(modelManager.getIBook()));
     }
 
     @Test
@@ -41,15 +34,15 @@ public class ModelManagerTest {
 
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
-        OldUserPrefs userPrefs = new OldUserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setIBookFilePath(Paths.get("ibook/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
-        OldUserPrefs oldUserPrefs = new OldUserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
+        userPrefs.setIBookFilePath(Paths.get("new/ibook/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -66,47 +59,47 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setIBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setIBookFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+    public void setIBookFilePath_validPath_setsIBookFilePath() {
+        Path path = Paths.get("ibook/file/path");
+        modelManager.setIBookFilePath(path);
+        assertEquals(path, modelManager.getIBookFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasProduct_nullProduct_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasProduct(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasProduct_productNotInIBook_returnsFalse() {
+        assertFalse(modelManager.hasProduct(PRODUCT_A));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasProduct_productInIBook_returnsTrue() {
+        modelManager.addProduct(PRODUCT_A);
+        assertTrue(modelManager.hasProduct(PRODUCT_A));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredProductList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredProductList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
-        OldUserPrefs userPrefs = new OldUserPrefs();
+        IBook iBook = new IBookBuilder().withProduct(PRODUCT_A).withProduct(PRODUCT_B).build();
+        IBook differentIBook = new IBook();
+        UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(iBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(iBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -118,22 +111,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different iBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentIBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        modelManager.updateFilteredProductList(new ProductFulfillsFiltersPredicate(PRODUCT_B));
+        assertFalse(modelManager.equals(new ModelManager(iBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
 
         // different userPrefs -> returns false
-        OldUserPrefs differentUserPrefs = new OldUserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setIBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(iBook, differentUserPrefs)));
     }
 
- */
 }

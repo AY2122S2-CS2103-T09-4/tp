@@ -1,14 +1,13 @@
 package seedu.ibook.model;
-/*
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_B;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_B;
 import static seedu.ibook.testutil.Assert.assertThrows;
-import static seedu.ibook.testutil.TypicalPersons.ALICE;
-import static seedu.ibook.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
+import static seedu.ibook.testutil.TypicalProducts.getTypicalIBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,87 +18,88 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.ibook.model.person.Person;
-import seedu.ibook.model.person.exceptions.DuplicatePersonException;
-import seedu.ibook.testutil.PersonBuilder;
+import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.exceptions.DuplicateProductException;
+import seedu.ibook.testutil.ProductBuilder;
 
 
- */
 public class IBookTest {
-/*
-    private final AddressBook addressBook = new AddressBook();
+    private final IBook iBook = new IBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), iBook.getProductList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> iBook.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyIBook_replacesData() {
+        IBook newData = getTypicalIBook();
+        iBook.resetData(newData);
+        assertEquals(newData, iBook);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicateProducts_throwsDuplicateProductException() {
+        // Two products with the same identity fields
+        Product editedProduct = new ProductBuilder(PRODUCT_A)
+                .withPrice(VALID_PRICE_B)
+                .withDescription(VALID_DESCRIPTION_B)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Product> newProducts = Arrays.asList(PRODUCT_A, editedProduct);
+        IBookStub newData = new IBookStub(newProducts);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateProductException.class, () -> iBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasProduct_nullProduct_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> iBook.hasProduct(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasProduct_productNotInIBook_returnsFalse() {
+        assertFalse(iBook.hasProduct(PRODUCT_A));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasProduct_productInIBook_returnsTrue() {
+        iBook.addProduct(PRODUCT_A);
+        assertTrue(iBook.hasProduct(PRODUCT_A));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasProduct_productWithSameIdentityFieldsInIBook_returnsTrue() {
+        iBook.addProduct(PRODUCT_A);
+        Product editedProduct = new ProductBuilder(PRODUCT_A)
+                .withPrice(VALID_PRICE_B)
+                .withDescription(VALID_DESCRIPTION_B)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(iBook.hasProduct(editedProduct));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getProductList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> iBook.getProductList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyIBook whose products list can violate interface constraints.
+     */
+    private static class IBookStub implements ReadOnlyIBook {
+        private final ObservableList<Product> products = FXCollections.observableArrayList();
 
-    private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
-
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        IBookStub(Collection<Product> products) {
+            this.products.setAll(products);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Product> getProductList() {
+            return products;
         }
     }
-    */
 }
