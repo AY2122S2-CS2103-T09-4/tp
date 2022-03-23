@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ibook.model.item.exceptions.ItemNotFoundException;
+import seedu.ibook.model.product.Product.Item;
 import seedu.ibook.model.product.exceptions.ProductNotFoundException;
 
 /**

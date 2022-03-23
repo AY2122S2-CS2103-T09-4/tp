@@ -4,8 +4,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
-import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.Product.Item;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
 

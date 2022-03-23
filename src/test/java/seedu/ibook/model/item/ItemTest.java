@@ -11,6 +11,7 @@ import static seedu.ibook.testutil.TypicalItems.QUANTITY_10;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ibook.model.product.Product.Item;
 import seedu.ibook.testutil.ItemBuilder;
 
 class ItemTest {

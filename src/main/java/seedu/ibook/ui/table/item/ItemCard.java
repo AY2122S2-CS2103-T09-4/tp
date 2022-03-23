@@ -3,7 +3,7 @@ package seedu.ibook.ui.table.item;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import seedu.ibook.model.item.Item;
+import seedu.ibook.model.product.Product.Item;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
 
