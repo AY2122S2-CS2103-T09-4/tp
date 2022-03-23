@@ -9,13 +9,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ibook.commons.exceptions.IllegalValueException;
-import seedu.ibook.model.item.UniqueItemList;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
-import seedu.ibook.model.product.Product.Item;
 
 /**
  * Jackson-friendly version of {@link Product}.
