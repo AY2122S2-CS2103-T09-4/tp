@@ -67,11 +67,6 @@ class JsonAdaptedProduct {
      * @throws IllegalValueException if there were any data constraints violated in the adapted product.
      */
     public Product toModelType() throws IllegalValueException {
-        final List<Item> productItems = new ArrayList<>();
-        for (JsonAdaptedItem item : items) {
-            productItems.add(item.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -106,10 +101,12 @@ class JsonAdaptedProduct {
         }
         final Price modelPrice = new Price(price);
 
-        final UniqueItemList modelItems = new UniqueItemList();
-        modelItems.setItems(productItems);
+        Product product = new Product(modelName, modelCategory, modelDescription, modelPrice);
+        for (JsonAdaptedItem item : items) {
+            product.addItem(item.toModelType(product));
+        }
 
-        return new Product(modelName, modelCategory, modelDescription, modelPrice);
+        return product;
     }
 
 }
