@@ -65,4 +65,19 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents a non-zero unsigned integer pair separated by "-"
+     * e.g. 1-3, 2-1, 3-4, ..., {@code Integer.MAX_VALUE} <br>
+     * Will return false for any other non-null string input <br>
+     * e.g. empty string, "-1-7", "0-2", "0-+1", and " 2-4 " (untrimmed),
+     *      "3- 0" (contains whitespace), "1-a" (contains letters)
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isNonZeroUnsignedCompoundInteger(String s) {
+        requireNonNull(s);
+        String[] parts = s.split("-", 2);
+        return isNonZeroUnsignedInteger(parts[0])
+                && isNonZeroUnsignedInteger(parts[1]);
+    }
 }

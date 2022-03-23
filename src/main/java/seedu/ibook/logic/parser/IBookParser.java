@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.ibook.logic.commands.AddCommand;
+import seedu.ibook.logic.commands.AddItemCommand;
 import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.DeleteCommand;
@@ -51,6 +52,9 @@ public class IBookParser {
 
         case UpdateCommand.COMMAND_WORD:
             return new UpdateCommandParser().parse(arguments);
+
+        case AddItemCommand.COMMAND_WORD:
+            return new AddItemCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             if (arguments.isEmpty()) {

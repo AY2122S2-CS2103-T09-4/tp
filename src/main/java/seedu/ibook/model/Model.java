@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.Product.Item;
 import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
@@ -69,6 +70,17 @@ public interface Model {
      * {@code product} must not already exist in the Ibook.
      */
     void addProduct(Product product);
+
+    /**
+     * Returns true if an item with the same identity as {@code item} exists in the IBook.
+     */
+    boolean hasItem(Item item);
+
+    /**
+     * Adds the given item to {@code product}.
+     * {@code item} must not already exist in the IBook.
+     */
+    void addItem(Product product, Item item);
 
     /**
      * Replaces the given product {@code target} with {@code editedProduct}.

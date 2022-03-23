@@ -90,6 +90,13 @@ public class Product {
     }
 
     /**
+     * Returns true if the {@code Item} is in the current viewed list.
+     */
+    public boolean hasItem(Item i) {
+        return filteredItems.contains(i);
+    }
+
+    /**
      * Removes {@code key} from this {@code items}.
      * {@code key} must exist in items.
      */

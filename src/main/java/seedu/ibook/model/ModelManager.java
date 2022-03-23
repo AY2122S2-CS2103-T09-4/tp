@@ -11,6 +11,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.Product.Item;
 import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
@@ -116,6 +117,21 @@ public class ModelManager implements Model {
         iBook.setProduct(target, editedProduct);
     }
 
+    //=========== Item ========================================================================================
+
+    @Override
+    public boolean hasItem(Item item) {
+        requireNonNull(item);
+
+        return iBook.hasItem(item);
+    }
+
+    @Override
+    public void addItem(Product product, Item item) {
+        requireAllNonNull(product, item);
+
+        iBook.addItem(product, item);
+    }
     //=========== Filtered Product List Accessors =============================================================
 
     /**

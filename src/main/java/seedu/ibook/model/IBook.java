@@ -1,11 +1,14 @@
 package seedu.ibook.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.model.product.Product;
+import seedu.ibook.model.product.Product.Item;
 import seedu.ibook.model.product.UniqueProductList;
 
 /**
@@ -91,6 +94,26 @@ public class IBook implements ReadOnlyIBook {
      */
     public void removeProduct(Product key) {
         products.remove(key);
+    }
+
+    //// item-level operations
+
+    /**
+     * Returns true if a product with the same identity as {@code product} exists in the iBook.
+     */
+    public boolean hasItem(Item item) {
+        requireNonNull(item);
+        return StreamSupport.stream(products.spliterator(), false) // Turn Iterable<Product> to Stream<Product>
+                .anyMatch(product -> product.hasItem(item));
+    }
+
+    /**
+     * Adds a item to the iBook.
+     * The product must not already exist in the iBook.
+     */
+    public void addItem(Product product, Item item) {
+        requireAllNonNull(product, item);
+        product.addItem(item);
     }
 
     //// util methods
